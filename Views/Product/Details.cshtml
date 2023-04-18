@@ -1,0 +1,80 @@
+﻿@model freshMart.Models.tbl_product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        
+
+            <dt>
+                @Html.DisplayNameFor(model => model.product_id)
+            </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_image)
+            @*<img src="@Url.Content(this.Model.product_image)" height="100" width="100" />*@
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.product_image)*@
+            <img src="@Url.Content(this.Model.product_image)" height="100" width="100" />
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_price)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.product_fk_category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_fk_category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_fk_admin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_fk_admin)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

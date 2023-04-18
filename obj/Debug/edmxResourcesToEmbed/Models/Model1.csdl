@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FreshMartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="customer_table">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="customer_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="customer_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="customer_contactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="admin_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="admin_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_category" Relationship="Self.FK__tbl_categ__categ__440B1D61" FromRole="tbl_admin" ToRole="tbl_category" />
+    <NavigationProperty Name="tbl_product" Relationship="Self.FK__tbl_produ__produ__47DBAE45" FromRole="tbl_admin" ToRole="tbl_product" />
+  </EntityType>
+  <EntityType Name="tbl_category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="category_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="category_fk" Type="Int32" />
+    <NavigationProperty Name="tbl_admin" Relationship="Self.FK__tbl_categ__categ__440B1D61" FromRole="tbl_category" ToRole="tbl_admin" />
+    <NavigationProperty Name="tbl_product" Relationship="Self.FK__tbl_produ__produ__46E78A0C" FromRole="tbl_category" ToRole="tbl_product" />
+  </EntityType>
+  <EntityType Name="tbl_product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="product_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="product_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="product_price" Type="Int32" Nullable="false" />
+    <Property Name="product_fk_category" Type="Int32" />
+    <Property Name="product_fk_admin" Type="Int32" />
+    <NavigationProperty Name="tbl_admin" Relationship="Self.FK__tbl_produ__produ__47DBAE45" FromRole="tbl_product" ToRole="tbl_admin" />
+    <NavigationProperty Name="tbl_category" Relationship="Self.FK__tbl_produ__produ__46E78A0C" FromRole="tbl_product" ToRole="tbl_category" />
+  </EntityType>
+  <Association Name="FK__tbl_categ__categ__440B1D61">
+    <End Role="tbl_admin" Type="Self.tbl_admin" Multiplicity="0..1" />
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_admin">
+        <PropertyRef Name="admin_id" />
+      </Principal>
+      <Dependent Role="tbl_category">
+        <PropertyRef Name="category_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_produ__produ__47DBAE45">
+    <End Role="tbl_admin" Type="Self.tbl_admin" Multiplicity="0..1" />
+    <End Role="tbl_product" Type="Self.tbl_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_admin">
+        <PropertyRef Name="admin_id" />
+      </Principal>
+      <Dependent Role="tbl_product">
+        <PropertyRef Name="product_fk_admin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_produ__produ__46E78A0C">
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="0..1" />
+    <End Role="tbl_product" Type="Self.tbl_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="tbl_product">
+        <PropertyRef Name="product_fk_category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FreshMartEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="customer_table" EntityType="Self.customer_table" />
+    <EntitySet Name="tbl_admin" EntityType="Self.tbl_admin" />
+    <EntitySet Name="tbl_category" EntityType="Self.tbl_category" />
+    <EntitySet Name="tbl_product" EntityType="Self.tbl_product" />
+    <AssociationSet Name="FK__tbl_categ__categ__440B1D61" Association="Self.FK__tbl_categ__categ__440B1D61">
+      <End Role="tbl_admin" EntitySet="tbl_admin" />
+      <End Role="tbl_category" EntitySet="tbl_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_produ__produ__47DBAE45" Association="Self.FK__tbl_produ__produ__47DBAE45">
+      <End Role="tbl_admin" EntitySet="tbl_admin" />
+      <End Role="tbl_product" EntitySet="tbl_product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_produ__produ__46E78A0C" Association="Self.FK__tbl_produ__produ__46E78A0C">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_product" EntitySet="tbl_product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,208 @@
+﻿@model IEnumerable<freshMart.Models.tbl_product>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        grid-auto-rows: minmax(100px, auto);
+        vertical-align: middle;
+    }
+
+    section:nth-child(even) {
+        background: #eee;
+    }
+
+    .btn {
+        margin-top: 1rem;
+        display: inline-block;
+        font-size: 1.7rem;
+        color: #fff;
+        background: var(--black);
+        border-radius: .5rem;
+        cursor: pointer;
+        padding: .8rem 3rem;
+    }
+
+        .btn:hover {
+            background: var(--green);
+            letter-spacing: .1rem;
+        }
+
+    .dishes .box-container {
+        display: grid;
+        width: 380px;
+        grid-template-columns: repeat(auto-fit, minmax(28rem,1fr));
+        gap: 1.5rem;
+        vertical-align: middle;
+    }
+
+        .dishes .box-container .box {
+            padding: 2.5rem;
+            background: #fff;
+            border-radius: .5rem;
+            border: .1rem solid rgba(0,0,0,.2);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            width: 450px;
+            overflow: hidden;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+            .dishes .box-container .box span {
+                color: var(--green);
+                font-weight: bolder;
+                margin-right: 1rem;
+                font-size: 2.5rem;
+            }
+
+            .dishes .box-container .box img {
+                height: 17rem;
+                margin: 1rem 0;
+            }
+
+            .dishes .box-container .box h3 {
+                color: var(--black);
+                font-size: 2.5rem;
+            }
+
+    /*div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+        }
+
+            div.gallery:hover {
+                border: 1px solid #777;
+            }
+
+            div.gallery img {
+                width: 100%;
+                height: auto;
+            }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }*/
+</style>
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-6 col-sm-6 col-xs-6">
+
+            <div class="account">
+                <ul>
+                    <li>
+                        <div>
+                            <h4><a>Welcome @Session["UserName"]</a></h4>
+                        </div>
+
+
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="themeSlider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#themeSlider" data-slide-to="1"></li>
+        <li data-target="#themeSlider" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="imgOverlay"></div>
+            <img style="height:420px;width:100%" src="../Images/p2.jpg" alt="First slide">
+            <div class="carousel-caption">
+                <h3>New</h3>
+
+            </div>
+        </div>
+       
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:420px;width:100%" src="../Images/first-images.jpg" alt="Second slide">
+            <div class="carousel-caption">
+                <h3>Grocery Shop</h3>
+
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:420px;width:100%" src="../Images/pic3.jpg" alt="Third slide">
+            <div class="carousel-caption">
+                <h3>Latest</h3>
+
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+
+</div>
+
+
+<h2 style="text-align: center; margin-top: 10px; margin-bottom: 15px; animation: scale 1.5s forwards;">Products</h2>
+
+
+
+@foreach (var item in Model)
+{
+    @*<div class="gallery">*@
+    <div class="row product-container" style="float:left;width:50%;padding:5px" ;>
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:5px">
+            <div class="wrapper" style="text-align: center; vertical-align: middle;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <section class="dishes" id="dishes">
+                            <div class="box-container">
+                                <div class="box">
+
+                                    <img src="@Url.Content(item.product_image)" />
+                                    @*<div class="desc">*@
+                                    <h3>@item.product_name</h3>
+                                    <span>Price-@item.product_price</span>
+                                    @using (Html.BeginForm("AddtoCart", "Home", new { productId = item.product_id, url = "HomeIndex" }, FormMethod.Post))
+                                    {
+                                        <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+                                    }
+                                    @*<a href="#" class="btn">add to cart</a>*@
+                                    @*</div>*@
+                                    @*<a style="border-radius:initial;" href="/Details/Product">User</a>*@
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+
+            }
+
+
+            
+
+            <h4>@Html.ActionLink("Logout", "Logout", "Authenticate")</h4>
+
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }

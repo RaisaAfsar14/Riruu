@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5a6f48ed1ef4f2b88355dc2201f9a88" Name="Diagram1" ZoomLevel="112">
+        <EntityTypeShape EntityType="FreshMartModel.customer_table" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshMartModel.tbl_admin" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshMartModel.tbl_category" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshMartModel.tbl_product" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="FreshMartModel.FK__tbl_categ__categ__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshMartModel.FK__tbl_produ__produ__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshMartModel.FK__tbl_produ__produ__46E78A0C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
